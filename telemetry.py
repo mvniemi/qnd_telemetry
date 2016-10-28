@@ -4,7 +4,8 @@ import io
 import math
 import numpy
 import pyaudio
-
+import time
+comport='COM6'
 
 class telem:
     def __init__(self, port):
@@ -63,11 +64,13 @@ if __name__ == '__main__':
     stream = p.open(format=pyaudio.paFloat32,
                     channels=1, rate=44100, output=1)
 
-    vario = telem('COM6')
+    vario = telem(comport)
     engine = pyttsx.init()
     count = 0
-
+    t=time.time()
+    print t
     while True:
+
         count+=1
         #text=raw_input('Type stuff')
         velocity=vario.velocity
@@ -76,10 +79,16 @@ if __name__ == '__main__':
         voltage=vario.voltage
         altitude=vario.altitude-25
 
-        # altitude = (altitude/10)*10
-        # if altitude>100:
-        #  altitude=((altitude/100)*100)
+        altitude = (altitude/10)*10
+        if altitude>100:
+         altitude=((altitude/100)*100)
         print "Velocity "+str(vario.velocity)+" Altitude "+str(altitude)+" "+str(vario.timestamp)
+        diff=time.time()-t
+        print diff
+        if diff>7:
+            engine.say(altitude)
+            engine.runAndWait()
+            t = time.time()
         # if (count%5==1):
             #engine.say(altitude)
             # if (count%5==1):
