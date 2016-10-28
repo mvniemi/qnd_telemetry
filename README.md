@@ -10,3 +10,5 @@ a audio variometer and altitude call outs.
 
 The point of this project is to minimize abstraction and proprietary hardware so that you can get your raw data and play around with it on
 your PC or expand out on your arduino base station. 
+
+Currently on my remote unit I have a bmp_180 barometer and a voltage divider circuit to determine altitude and battery voltage.
