@@ -14,6 +14,7 @@ class telem:
         self.voltage='0.0'
         self.velocity=0
         self.timestamp=0
+
     def update(self):
         dataLine=readline(self.ser)
         try:
