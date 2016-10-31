@@ -13,4 +13,4 @@ your PC or expand out on your arduino base station.
 
 Currently on my remote unit I have a bmp_180 barometer and a voltage divider circuit to determine altitude and battery voltage.
 
-![alt text](/schematics/Telem_Remote_schem.svg)
+![alt text](https://cdn.rawgit.com/mvniemi/qnd_telemetry/master/schematics/Telem_Remote_schem.svg)
