@@ -1,10 +1,3 @@
-
-/*
-* Getting Started example sketch for nRF24L01+ radios
-* This is an example of how to send data from one node to another using data structures
-* Updated: Dec 2014 by TMRh20
-*/
-
 #include <SPI.h>
 #include "RF24.h"
 
@@ -19,7 +12,6 @@ bool radioNumber = 0;
 RF24 radio(7,8);
 /**********************************************************/
 
-
 // Used to control whether this node is sending or receiving
 bool role = 0;
 
@@ -30,22 +22,19 @@ bool role = 0;
 */
 struct dataStruct{
   unsigned long _micros;
-  float value;
+  float alt;
   float voltage;
 }myData;
 
-float maxalt= 0;
+float alt= 0;
 void setup() {
 
   Serial.begin(115200);
-  //Serial.println(F("RF24/examples/GettingStarted_HandlingData"));
-  //Serial.println(F("*** PRESS 'T' to begin transmitting to the other node"));
-  
   radio.begin();
 
   // Set the PA Level low to prevent power supply related issues since this is a
  // getting_started sketch, and the likelihood of close proximity of the devices. RF24_PA_MAX is default.
-  radio.setPALevel(RF24_PA_LOW);
+  radio.setPALevel(RF24_PA_MAX);
   
   // Open a writing and reading pipe on each radio, with opposite addresses
   if(radioNumber){
@@ -56,50 +45,23 @@ void setup() {
     radio.openReadingPipe(1,addresses[1]);
   }
   
-  myData.value = 1.22;
+  myData.value = 0;
   // Start the radio listening for data
   radio.startListening();
 }
 
-
-
-
 void loop() {
-  
-  
-
-/****************** Pong Back Role ***************************/
-
-  if ( role == 0 )
-  {
-    //Serial.println("hello");
     if( radio.available()){
                                                            // Variable for the received timestamp
       while (radio.available()) {                          // While there is data ready
         radio.read( &myData, sizeof(myData) );             // Get the payload
       }
-     
-      if (myData.value > maxalt){
-        maxalt=myData.value;
-      }
-      //Serial.print(F("Meters"));
-      Serial.print(myData.value*3.28,0);
+
+      //Convert from feet to meters
+      Serial.print(myData.alt*3.28,0);
       Serial.print(',');
       Serial.print(myData.voltage);
       Serial.print(',');
       Serial.println(myData._micros);
-      //Serial.println(" feet");
-      //Serial.print("  Max Alt: ");
-      //Serial.println(maxalt);
    }
- }
-
-
-
-
-/****************** Change Roles via Serial Commands ***************************/
-
-
-
-
 } // Loop
