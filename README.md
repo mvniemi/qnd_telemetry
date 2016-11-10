@@ -1,4 +1,7 @@
 # qnd_telemetry
+
+Check out my Instructable: http://www.instructables.com/id/Quick-and-Dirty-RC-Telemetry/
+
 "Quick and Dirty" Telemetry
 A basic telemetry system for RC Aircraft using inexpensive NR24 radio module and the Arduino Pro Mini.
 
