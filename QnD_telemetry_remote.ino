@@ -58,7 +58,7 @@ void loop() {
   
 
     Serial.println(F("Now sending"));
-    myData.value = bmp.readAltitude()-0;
+    myData.alt = bmp.readAltitude()-0;
     //Voltage Divider AnalogRead->MeasuredVoltage->Convert to Battery Voltage
     myData.voltage= (analogRead(A2)*(5.0/1023.0))*(147.0/47.0);
     Serial.println(myData.alt);
